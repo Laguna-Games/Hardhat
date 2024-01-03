@@ -1,0 +1,12 @@
+# Erlang/Elixir
+/_build/
+/deps/
+cover/
+doc/
+erl_crash.dump
+*.ez
+hardhat_*.tar
+*.db*
+
+# Node
+node_modules/
