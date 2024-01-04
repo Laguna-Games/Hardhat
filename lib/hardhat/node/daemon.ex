@@ -109,7 +109,7 @@ defmodule Hardhat.Node.Daemon do
     # Ignore empty lines.
     {:noreply, state}
   end
-  def handle_info({port, {:data, {_eol, line}}}, %State{port: port, log: :none} = state) do
+  def handle_info({port, {:data, {_eol, _line}}}, %State{port: port, log: :none} = state) do
     # Do not log.
     {:noreply, state}
   end
