@@ -65,13 +65,13 @@ defmodule Hardhat.Node.Daemon do
   def init({path, arguments, options}) do
     Process.flag(:trap_exit, true)
 
+    # Store log level for forwarding logs from the process.
+    {log, options} = Keyword.pop(options, :log, :debug)
+
     # Execute through a shim to prevent zombies.
     port = Port.open({:spawn_executable, @shim}, [{:args, [path | arguments]} | handle_port_options(options, @base)])
     ref = Port.monitor(port)
     {:os_pid, pid} = Port.info(port, :os_pid)
-
-    # Store log level for forwarding logs from the process.
-    log = Keyword.get(options, :log, :debug)
 
     {:ok, %State{port: port, ref: ref, pid: pid, exited: false, log: log}}
   end
