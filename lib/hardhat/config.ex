@@ -172,5 +172,5 @@ defmodule Hardhat.Config do
   end
 
   defp do_dump_interval({min, max}), do: [min, max]
-  defp do_dump_interval(constant), do: constant
+  defp do_dump_interval(constant), do: constant || 0
 end
