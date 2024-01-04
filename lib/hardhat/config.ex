@@ -60,6 +60,9 @@ defmodule Hardhat.Config do
 
   defmodule Network do
     @type t :: %__MODULE__{
+      # Specifies the network/chain identifier.
+      chain_id: non_neg_integer() | nil,
+
       # Specifies another network to fork.
       #
       # If specified, Hardhat will fork from another network by bootstrapping
@@ -81,6 +84,7 @@ defmodule Hardhat.Config do
     }
 
     defstruct [
+      :chain_id,
       :fork,
       :automine,
       :order
@@ -145,6 +149,7 @@ defmodule Hardhat.Config do
 
   defp do_dump_network(%Hardhat.Config.Network{} = network) do
     %{
+      "chainId" => network.chain_id || 31337,
       "mining" => %{
         "auto" => not is_nil(network.automine),
         "interval" => do_dump_interval(network.automine),
